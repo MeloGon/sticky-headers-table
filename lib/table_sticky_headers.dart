@@ -3,6 +3,8 @@ library table_sticky_headers;
 export 'cell_alignments.dart';
 export 'cell_dimensions.dart';
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -55,6 +57,9 @@ class StickyHeadersTable extends StatefulWidget {
     /// Called when scrolling has ended, passing the current offset position
     this.onEndScrolling,
 
+    /// for size of cells
+    required this.widthCells,
+
     /// Scroll controllers for the table
     ScrollControllers? scrollControllers,
   })  : this.scrollControllers = scrollControllers ?? ScrollControllers(),
@@ -83,6 +88,7 @@ class StickyHeadersTable extends StatefulWidget {
   final double initialScrollOffsetY;
   final Function(double x, double y)? onEndScrolling;
   final ScrollControllers scrollControllers;
+  final double widthCells;
 
   @override
   _StickyHeadersTableState createState() => _StickyHeadersTableState();
@@ -146,9 +152,9 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () => widget.onColumnTitlePressed(i),
                         child: Container(
-                          width: widget.cellDimensions.stickyWidth(i),
+                          width: 140,
                           height: widget.cellDimensions.stickyLegendHeight,
-                          alignment: widget.cellAlignments.rowAlignment(i),
+                          alignment: Alignment.centerLeft,
                           child: widget.columnsTitleBuilder(i),
                         ),
                       ),
@@ -224,6 +230,7 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                         controller:
                             widget.scrollControllers._verticalBodyController,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: List.generate(
                             widget.rowsLength,
                             (int rowIdx) => Row(
@@ -234,9 +241,9 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                                   onTap: () => widget.onContentCellPressed(
                                       columnIdx, rowIdx),
                                   child: Container(
-                                    width: widget.cellDimensions
-                                        .contentSize(rowIdx, columnIdx)
-                                        .width,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(color: Colors.grey)),
+                                    width: widget.widthCells,
                                     height: widget.cellDimensions
                                         .contentSize(rowIdx, columnIdx)
                                         .height,
