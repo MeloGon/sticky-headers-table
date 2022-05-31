@@ -19,6 +19,8 @@ class SimpleTablePage extends StatelessWidget {
         backgroundColor: Colors.amber,
       ),
       body: StickyHeadersTable(
+        colorHeader: Colors.transparent,
+        contentLength: 12,
         widthCells: (i, j) => 80.0 + Random().nextInt(150 - 80),
         columnsLength: titleColumn.length,
         rowsLength: titleRow.length,

@@ -59,6 +59,8 @@ class StickyHeadersTable extends StatefulWidget {
 
     /// for size of cells
     required this.widthCells,
+    required this.contentLength,
+    required this.colorHeader,
 
     /// Scroll controllers for the table
     ScrollControllers? scrollControllers,
@@ -89,6 +91,8 @@ class StickyHeadersTable extends StatefulWidget {
   final Function(double x, double y)? onEndScrolling;
   final ScrollControllers scrollControllers;
   final double Function(int columnIndex, int rowIndex) widthCells;
+  final int contentLength;
+  final Color colorHeader;
 
   @override
   _StickyHeadersTableState createState() => _StickyHeadersTableState();
@@ -133,6 +137,7 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
               behavior: HitTestBehavior.opaque,
               onTap: widget.onStickyLegendPressed,
               child: Container(
+                color: widget.colorHeader,
                 width: widget.cellDimensions.stickyLegendWidth,
                 height: widget.cellDimensions.stickyLegendHeight,
                 alignment: widget.cellAlignments.stickyLegendAlignment,
@@ -152,6 +157,7 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () => widget.onColumnTitlePressed(i),
                         child: Container(
+                          color: widget.colorHeader,
                           width: 140,
                           height: widget.cellDimensions.stickyLegendHeight,
                           alignment: Alignment.centerLeft,
@@ -194,6 +200,8 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () => widget.onRowTitlePressed(i),
                         child: Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Color(0xff262626))),
                           width: widget.cellDimensions.stickyLegendWidth,
                           height: widget.cellDimensions.stickyHeight(i),
                           alignment: widget.cellAlignments.columnAlignment(i),
@@ -235,14 +243,15 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                             widget.rowsLength,
                             (int rowIdx) => Row(
                               children: List.generate(
-                                widget.columnsLength,
+                                widget.contentLength,
                                 (int columnIdx) => GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () => widget.onContentCellPressed(
                                       columnIdx, rowIdx),
                                   child: Container(
                                     decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey)),
+                                        border: Border.all(
+                                            color: Color(0xff262626))),
                                     width: widget.widthCells(
                                       rowIdx,
                                       columnIdx,
