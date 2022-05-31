@@ -43,6 +43,7 @@ class _TapHandlerPageState extends State<TapHandlerPage> {
             backgroundColor: Colors.amber,
           ),
           body: StickyHeadersTable(
+            widthCells: (i, j) => 70,
             columnsLength: widget.titleColumn.length,
             rowsLength: widget.titleRow.length,
             columnsTitleBuilder: (i) => TextButton(

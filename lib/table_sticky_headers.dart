@@ -88,7 +88,7 @@ class StickyHeadersTable extends StatefulWidget {
   final double initialScrollOffsetY;
   final Function(double x, double y)? onEndScrolling;
   final ScrollControllers scrollControllers;
-  final double widthCells;
+  final double Function(int columnIndex, int rowIndex) widthCells;
 
   @override
   _StickyHeadersTableState createState() => _StickyHeadersTableState();
@@ -243,9 +243,15 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                                   child: Container(
                                     decoration: BoxDecoration(
                                         border: Border.all(color: Colors.grey)),
-                                    width: widget.widthCells,
+                                    width: widget.widthCells(
+                                      rowIdx,
+                                      columnIdx,
+                                    ),
                                     height: widget.cellDimensions
-                                        .contentSize(rowIdx, columnIdx)
+                                        .contentSize(
+                                          rowIdx,
+                                          columnIdx,
+                                        )
                                         .height,
                                     alignment: widget.cellAlignments
                                         .contentAlignment(rowIdx, columnIdx),

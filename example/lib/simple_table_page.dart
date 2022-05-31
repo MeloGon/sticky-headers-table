@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_table/table_sticky_headers.dart';
 
@@ -17,6 +19,7 @@ class SimpleTablePage extends StatelessWidget {
         backgroundColor: Colors.amber,
       ),
       body: StickyHeadersTable(
+        widthCells: (i, j) => 80.0 + Random().nextInt(150 - 80),
         columnsLength: titleColumn.length,
         rowsLength: titleRow.length,
         columnsTitleBuilder: (i) => Text(titleColumn[i]),
