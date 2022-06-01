@@ -43,6 +43,7 @@ class _TapHandlerPageState extends State<TapHandlerPage> {
             backgroundColor: Colors.amber,
           ),
           body: StickyHeadersTable(
+            numberOfProgramsbyRow: [1, 2, 3, 4],
             colorHeader: Colors.transparent,
             contentLength: 12,
             widthCells: (i, j) => 70,

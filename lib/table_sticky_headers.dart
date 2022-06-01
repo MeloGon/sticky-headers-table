@@ -61,6 +61,7 @@ class StickyHeadersTable extends StatefulWidget {
     required this.widthCells,
     required this.contentLength,
     required this.colorHeader,
+    required this.numberOfProgramsbyRow,
 
     /// Scroll controllers for the table
     ScrollControllers? scrollControllers,
@@ -93,6 +94,7 @@ class StickyHeadersTable extends StatefulWidget {
   final double Function(int columnIndex, int rowIndex) widthCells;
   final int contentLength;
   final Color colorHeader;
+  final List<int> numberOfProgramsbyRow;
 
   @override
   _StickyHeadersTableState createState() => _StickyHeadersTableState();
@@ -243,7 +245,7 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                             widget.rowsLength,
                             (int rowIdx) => Row(
                               children: List.generate(
-                                widget.contentLength,
+                                widget.numberOfProgramsbyRow[rowIdx],
                                 (int columnIdx) => GestureDetector(
                                   behavior: HitTestBehavior.opaque,
                                   onTap: () => widget.onContentCellPressed(
