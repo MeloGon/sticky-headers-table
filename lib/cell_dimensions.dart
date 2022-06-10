@@ -5,7 +5,7 @@ class CellDimensions {
   static const CellDimensions base = CellDimensions.fixed(
     contentCellWidth: 70.0,
     contentCellHeight: 50.0,
-    stickyLegendWidth: 120.0,
+    stickyLegendWidth: 100.0,
     stickyLegendHeight: 50.0,
   );
 
