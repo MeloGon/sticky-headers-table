@@ -202,6 +202,7 @@ class _StickyHeadersTableState extends State<StickyHeadersTable> {
                         behavior: HitTestBehavior.opaque,
                         onTap: () => widget.onRowTitlePressed(i),
                         child: Container(
+                          padding: EdgeInsets.all(6),
                           decoration: BoxDecoration(
                               border: Border.all(color: Color(0xff262626))),
                           width: widget.cellDimensions.stickyLegendWidth,
